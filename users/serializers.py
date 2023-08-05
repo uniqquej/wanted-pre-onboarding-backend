@@ -24,4 +24,18 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user = super().create(validated_data)
         password = user.password
         user.set_password(password)
+        user.save()
         return user
+        
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    '''
+    simple JWT에서 제공해주는 token serializer
+    '''
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        token['email'] = user.email
+        
+        return token
