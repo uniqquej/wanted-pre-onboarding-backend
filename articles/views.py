@@ -27,3 +27,13 @@ class ArticleDetailView(APIView):
         article = get_object_or_404(Article, id=article_id)
         article_serializer = ArticleSerializer(article)
         return Response(article_serializer.data, status = status.HTTP_200_OK)
+    
+    def put(self, request, article_id):
+        article = get_object_or_404(Article, id=article_id)
+        if request.user == article.author:
+            article_serializer = ArticleSerializer(article, data=request.data, partial=True)
+            if article_serializer.is_valid():
+                article_serializer.save(author=request.user)
+                return Response(article_serializer.data, status=status.HTTP_200_OK)
+            return Response(article_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response('권한이 없습니다.',status=status.HTTP_401_UNAUTHORIZED)
