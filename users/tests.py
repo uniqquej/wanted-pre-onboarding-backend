@@ -20,6 +20,7 @@ class LoginTest(APITestCase):
     def setUp(self):
         self.data = {"email":"test@test.com","password":"testpass"}
         self.no_user_data = {"email":"not@test.com","password":"not_pass"}
+        self.not_match_data = {"email":"test@test.com","password":"not_pass"}
         self.user = User.objects.create_user('test@test.com','testpass')
         
     def test_login(self):
@@ -31,6 +32,12 @@ class LoginTest(APITestCase):
         url = reverse('login')
         response = self.client.post(url, self.no_user_data)
         self.assertEqual(response.status_code, 404)
+    
+    def test_not_match_password(self):
+        url = reverse('login')
+        response = self.client.post(url, self.not_match_data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data['msg'], '비밀번호를 다시 입력해주세요')
             
 class UserCreateSerializerErrorTest(TestCase):
     def test_password_not_match_error(self):
