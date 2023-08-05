@@ -15,6 +15,22 @@ class SignUpTest(APITestCase):
         }
         response = self.client.post(url, user_data)
         self.assertEqual(response.status_code,201)
+    
+class LoginTest(APITestCase):
+    def setUp(self):
+        self.data = {"email":"test@test.com","password":"testpass"}
+        self.no_user_data = {"email":"not@test.com","password":"not_pass"}
+        self.user = User.objects.create_user('test@test.com','testpass')
+        
+    def test_login(self):
+            url = reverse('login')
+            response = self.client.post(url, self.data)
+            self.assertEqual(response.status_code, 200)
+    
+    def test_no_user(self):
+        url = reverse('login')
+        response = self.client.post(url, self.no_user_data)
+        self.assertEqual(response.status_code, 404)
             
 class UserCreateSerializerErrorTest(TestCase):
     def test_password_not_match_error(self):
