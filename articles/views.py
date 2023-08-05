@@ -21,3 +21,9 @@ class ArticleView(APIView):
             return Response('게시글이 없습니다.', status=status.HTTP_200_OK)
         article_serializer = ArticleSerializer(articles, many=True)
         return Response(article_serializer.data, status=status.HTTP_200_OK)
+
+class ArticleDetailView(APIView):
+    def get(self, request, article_id):
+        article = get_object_or_404(Article, id=article_id)
+        article_serializer = ArticleSerializer(article)
+        return Response(article_serializer.data, status = status.HTTP_200_OK)
