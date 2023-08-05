@@ -1,5 +1,6 @@
 import os
 import environ
+from datetime import timedelta
 
 from pathlib import Path
 
@@ -42,6 +43,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "WANTED_BACKEND.urls"
 
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
