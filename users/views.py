@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate
 
@@ -20,10 +21,7 @@ class LogInView(APIView):
     def post(self, request):
         email = request.data['email']
         password = request.data['password']
-        user = User.objects.get(email = email)
-        
-        if user is None:
-            return Response({'msg':'없는 사용자입니다.'}, status = status.HTTP_404_NOT_FOUND)
+        user = get_object_or_404(User, email=email)
 
         if not check_password(password, user.password):
             return Response({'msg':'비밀번호를 다시 입력해주세요'}, status=status.HTTP_400_BAD_REQUEST)
