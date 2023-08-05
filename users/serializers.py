@@ -16,6 +16,9 @@ class UserCreateSerializer(serializers.ModelSerializer):
         elif len(data['password'])<8:
             raise serializers.ValidationError('비밀번호는 8자이상으로 설정해주세요.')
         
+        if '@' not in data['email']:
+            raise serializers.ValidationError('@를 사용해서 이메일을 입력해주세요')
+
         data.pop('password2')
         
         return data
