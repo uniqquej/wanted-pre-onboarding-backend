@@ -80,4 +80,4 @@ class ArticleDetailTest(APITestCase):
                               HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
         
         self.assertEqual(res.status_code, 204)
-        self.assertEqual(res.data, '삭제가 완료되었습니다.')
+        self.assertEqual(res.data['msg'], '삭제가 완료되었습니다.')
