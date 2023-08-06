@@ -26,6 +26,7 @@
 ![image](https://github.com/uniqquej/wanted-pre-onboarding-backend/assets/109218139/07f5cd9b-701b-494a-85fe-0bb11e3a41d7)
 
 ### 데모 영상
+[youtube 가기](https://www.youtube.com/watch?v=4AKbCzbxQjQ)
 ### 구현 방법 및 이유
 1. Django REST framework
     - serializer안에서 validate, create 등의 함수로 편리하게 데이터를 관리할 수 있음
