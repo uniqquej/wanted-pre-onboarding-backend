@@ -23,20 +23,18 @@
 7. 특정 게시글 삭제 | delete /article/<int:article_id>/
 
 ### ERD
-  
-  ![image](https://github.com/uniqquej/wanted-pre-onboarding-backend/assets/109218139/815c5212-b215-4676-a6f8-6ef413abec1f)
-https://dillinger.io/
+![image](https://github.com/uniqquej/wanted-pre-onboarding-backend/assets/109218139/07f5cd9b-701b-494a-85fe-0bb11e3a41d7)
 
 ### 데모 영상
 ### 구현 방법 및 이유
-1. Django REST framework 
-  - serializer안에서 validate, create 등의 함수로 편리하게 데이터를 관리할 수 있음
-  - orm 기능을 제공
-  - pagination 기능을 제공해줌
+1. Django REST framework
+    - serializer안에서 validate, create 등의 함수로 편리하게 데이터를 관리할 수 있음
+    - orm 기능을 제공
+    - pagination 기능을 제공해줌
 
 2. simple JWT
-  - 서버의 부담을 줄일 수 있음
-  - token의 유효기간 등 다양한 옵션을 간편하게 관리할 수 있음
+    - 서버의 부담을 줄일 수 있음
+    - token의 유효기간 등 다양한 옵션을 간편하게 관리할 수 있음
 
 ### API 명세
 | 기능 | url |method |
@@ -200,3 +198,12 @@ headers:{
     "msg": "권한이 없습니다."
 }
 ```
+
+### 추가 기능
+- TEST 코드 작성
+  - User
+    - 회원가입, 로그인 API test
+    - 조건 불일치 error test
+  - Article
+    - 게시글 목록, 작성, 특정 게시글 조회, 수정, 삭제 API test 
+
