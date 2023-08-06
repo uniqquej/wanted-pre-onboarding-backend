@@ -48,11 +48,11 @@ class ArticleDetailView(APIView):
                 article_serializer.save(author=request.user)
                 return Response(article_serializer.data, status=status.HTTP_200_OK)
             return Response(article_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response('권한이 없습니다.',status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'msg':'권한이 없습니다.'},status=status.HTTP_401_UNAUTHORIZED)
     
     def delete(self, request, article_id):
         article = get_object_or_404(Article, id=article_id)
         if request.user == article.author:
             article.delete()
-            return Response('삭제가 완료되었습니다.', status=status.HTTP_204_NO_CONTENT)
-        return Response('권한이 없습니다.',status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg':'삭제가 완료되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'msg':'권한이 없습니다.'},status=status.HTTP_401_UNAUTHORIZED)
